@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 import br.pucsp.escola.model.Produto;
@@ -23,6 +24,9 @@ public class BuscarProdutosService {
 
 	public List<Produto> porEndereco(int raio, String endereco, GeolocalizacaoService geoService) {
 		
+		Preconditions.checkArgument(raio > 0, "O raio deve ser maior que zero");
+		Preconditions.checkArgument(endereco != null, "O endereço de referencia deve ser informado");
+
 		List<Produto> list = Lists.newArrayList();
 		
 		for (Produto produto : map.keySet()) {
@@ -36,7 +40,18 @@ public class BuscarProdutosService {
 	}
 
 	public List<Produto> porNomeEscola(String nomeEscola) {
-		return Lists.newArrayList();
+		
+		Preconditions.checkArgument(nomeEscola != null, "O nome da escola deve ser informado");
+		
+		List<Produto> list = Lists.newArrayList();
+		
+		for (Produto produto : map.keySet()) {
+			if (produto.getListaMaterial().getCurso().getEscola().getNome().equals(nomeEscola)) {
+				list.add(produto);
+			}
+		}
+		
+		return list;
 	}
 	
 	public boolean inserirProduto(Produto produto) {

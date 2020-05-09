@@ -3,6 +3,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 
 import br.pucsp.escola.model.Papelaria;
@@ -24,6 +25,8 @@ public class InformarPrecoService {
 	}
 	
 	public boolean inserirPreco(PrecoProdutoPapelaria opcaoPreco) {
+		Preconditions.checkArgument(consultarOpcoesEPrecos(opcaoPreco.getPapelaria(), opcaoPreco.getProduto()).size() < 5, 
+				"Deve possuir no maximo 5 opções de preco cadastradas por produto");
 		return map.put(opcaoPreco, opcaoPreco) != null;
 	}
 	
