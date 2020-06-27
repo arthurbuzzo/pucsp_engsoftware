@@ -2,3 +2,4 @@
 .project
 /PUC-Testes-Aula01/.settings
 /PUC-Testes-Aula01/bin/*.class
+/PUC-Testes-Aula01/bin/*.txt
